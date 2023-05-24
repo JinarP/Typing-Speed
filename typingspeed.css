@@ -1,0 +1,33 @@
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 130%;
+    max-width: 35em;
+    height: 300px;
+    position: relative;
+    left: 500px;
+}
+
+#textGrid {
+    padding: 10px;
+    word-wrap: break-word;
+}
+
+#input {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
+
+#timePerLetter {
+    color: blue;
+}
+
+#correctLetter {
+    color: greenyellow;
+}
+
+#wrongLetter {
+    color: rgb(234, 11, 11);
+}
