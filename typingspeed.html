@@ -12,18 +12,21 @@
     <title>Typing speed</title>
 </head>
 
-<body>
+<body style="background-color: rgb(34, 30, 30);">
     <div class="card">
         <div id="textGrid"></div>
     </div>
+    <br>
     <div id="input">
         <input type="text" id="Typing" placeholder="write the text here">
         <button onclick="start()" class="btn btn-primary">START</button>
-        <button onclick="checkGame()" class="btn btn-danger">CHECK</button>
+        <button onclick="endGame()" class="btn btn-danger">STOP</button>
+        <button onclick="newGame()" class="btn btn-success">NEW GAME</button>
     </div>
-    <h1 id="timer"></h1>
+    
 
-    <div>
+    <div id="statistic">
+        <h1 id="timer"></h1>
         <h2 id="timePerLetter">Medium time: </h2>
         <h2 id="correctLetter">Letter write correct: </h2>
         <h2 id="wrongLetter">Wrong letter: </h2>

@@ -3,9 +3,11 @@
     transition: 0.3s;
     width: 130%;
     max-width: 35em;
-    height: 300px;
-    position: relative;
-    left: 500px;
+    height: 350px;
+    position: fixed;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 #textGrid {
@@ -14,10 +16,17 @@
 }
 
 #input {
-    display: flex;
-    align-items: center;
-    align-content: center;
-    justify-content: center;
+    position: fixed;
+    top: 63%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#statistic {
+    position: fixed;
+    top: 74%;
+    left: 20%;
+    transform: translate(-50%, -50%);
 }
 
 #timePerLetter {
@@ -30,4 +39,8 @@
 
 #wrongLetter {
     color: rgb(234, 11, 11);
+}
+
+#timer {
+    color: rgb(97, 171, 236);
 }

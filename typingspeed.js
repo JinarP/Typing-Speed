@@ -1,7 +1,10 @@
 let text = chooseWord();
-let typeText;
+let startGame = false;
+let finishGame = false;
 let time  = 0;
+let letterNumber = 0;
 let interval;
+addEventListener('keypress', checkGame);
 
 function timer() {
     time += 10;
@@ -13,14 +16,21 @@ function timer() {
 }
 
 function start() {
+    if (finishGame === true) {
+        return;
+    }
     document.getElementById("textGrid").innerText = text;
+    document.getElementById("textGrid").innerHTML +='<br>'
     interval = setInterval(timer, 10);
 }
 
 function checkGame() {
-    typeText = document.getElementById("Typing").value;
-    checkCorrectLetter(typeText);
-    clearInterval(interval);
+    let inputText = document.getElementById("Typing").value;
+    if (startGame === true) {
+       checkCorrectLetter(inputText);
+    }
+    startGame = true;
+    return;
 }
 
 function chooseWord() {
@@ -37,20 +47,39 @@ function generateNumber (minValue, maxValue) {
     return Math.floor(Math.random() * (maxValue - minValue) + minValue);
 }
 
-function checkCorrectLetter (writeText) {
-    let correctLetter = 0;
-    let wrongLetter = 0;
-    document.getElementById("textGrid").innerHTML +='<br>'
-    for (let i = 0; i < writeText.length; ++i) {
-        if (writeText[i] == text[i]) {
-            document.getElementById("textGrid").innerHTML += `<span style="color: green">${writeText[i]}</span>`;
-            ++correctLetter;
-        } else {
-            document.getElementById("textGrid").innerHTML += `<span style="color: red">${writeText[i]}</span>`;
-            ++wrongLetter;
-        }
+let correctLetter = 0;
+let wrongLetter = 0;
+function checkCorrectLetter (letter) {
+    if (finishGame === true) {
+        return;
     }
-    document.getElementById("timePerLetter").innerHTML += ((Math.floor(time / 1000) % 60) / writeText.length).toFixed(2) + " sec/letter";
-    document.getElementById("correctLetter").innerHTML += correctLetter;
-    document.getElementById("wrongLetter").innerHTML += wrongLetter;
+    let i = letter.length - 1;
+    if (letter[i] == text[letterNumber]) {
+        document.getElementById("textGrid").innerHTML += `<span style="color: green">${letter[i]}</span>`;
+        ++correctLetter;
+    } else {
+        document.getElementById("textGrid").innerHTML += `<span style="color: red">${letter[i]}</span>`;
+        ++wrongLetter;
+    }
+    ++letterNumber;
+    updateStatistic();
+    
+}
+
+function updateStatistic () {
+    document.getElementById("timePerLetter").innerHTML = "Medium time: " + ((Math.floor(time / 1000) % 60) / (wrongLetter + correctLetter)).toFixed(2) + " sec/letter";
+    document.getElementById("correctLetter").innerHTML = "Letter write correct: " + correctLetter;
+    document.getElementById("wrongLetter").innerHTML = "Wrong letter:" + wrongLetter;
+    if (letterNumber === text.length - 1) {
+        endGame();
+    }
+}
+
+function endGame () {
+    finishGame = true;
+    clearInterval(interval);
+}
+
+function newGame () {
+    window.location.reload();
 }
