@@ -1,4 +1,5 @@
 let text = chooseWord();
+let textCopy = text;
 let startGame = false;
 let finishGame = false;
 let time  = 0;
@@ -19,18 +20,23 @@ function start() {
     if (finishGame === true) {
         return;
     }
-    document.getElementById("textGrid").innerText = text;
-    document.getElementById("textGrid").innerHTML +='<br>'
+    document.getElementById("unCheckText").innerText = text;
     interval = setInterval(timer, 10);
 }
 
+let inputText ='';
 function checkGame() {
-    let inputText = document.getElementById("Typing").value;
+    let firstLength = inputText.length;
+    inputText = document.getElementById("Typing").value;
+    let currentLength = inputText.length;
+
+    if (firstLength === currentLength && currentLength != 0) {
+        return;
+    }
     if (startGame === true) {
        checkCorrectLetter(inputText);
     }
     startGame = true;
-    return;
 }
 
 function chooseWord() {
@@ -50,23 +56,26 @@ function generateNumber (minValue, maxValue) {
 let correctLetter = 0;
 let wrongLetter = 0;
 function checkCorrectLetter (letter) {
+    textCopy = textCopy.substring(1);
+    document.getElementById("unCheckText").innerText = "";
     if (finishGame === true) {
         return;
     }
     let i = letter.length - 1;
     if (letter[i] == text[letterNumber]) {
-        document.getElementById("textGrid").innerHTML += `<span style="color: green">${letter[i]}</span>`;
+        document.getElementById("checkText").innerHTML += `<span style="color: green">${letter[i]}</span>`;
         ++correctLetter;
     } else {
-        document.getElementById("textGrid").innerHTML += `<span style="color: red">${letter[i]}</span>`;
+        document.getElementById("checkText").innerHTML += `<span style="color: red">${letter[i]}</span>`;
         ++wrongLetter;
     }
+    document.getElementById("unCheckText").innerText = textCopy;
     ++letterNumber;
     updateStatistic();
     
 }
 
-function updateStatistic () {
+function updateStatistic() {
     document.getElementById("timePerLetter").innerHTML = "Medium time: " + ((Math.floor(time / 1000) % 60) / (wrongLetter + correctLetter)).toFixed(2) + " sec/letter";
     document.getElementById("correctLetter").innerHTML = "Letter write correct: " + correctLetter;
     document.getElementById("wrongLetter").innerHTML = "Wrong letter:" + wrongLetter;
@@ -76,6 +85,7 @@ function updateStatistic () {
 }
 
 function endGame () {
+    document.getElementById("correctText").innerText = text;
     finishGame = true;
     clearInterval(interval);
 }

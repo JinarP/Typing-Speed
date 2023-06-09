@@ -13,17 +13,22 @@
 </head>
 
 <body style="background-color: rgb(34, 30, 30);">
+
     <div class="card">
-        <div id="textGrid"></div>
+        <div id="textGrid">
+            <span id="checkText"></span>
+            <span id="unCheckText"></span>
+            <br>
+            <span id="correctText"></span>
+        </div>
     </div>
     <br>
     <div id="input">
-        <input type="text" id="Typing" placeholder="write the text here">
+        <textarea id="Typing" placeholder="write the text here"></textarea>
         <button onclick="start()" class="btn btn-primary">START</button>
         <button onclick="endGame()" class="btn btn-danger">STOP</button>
         <button onclick="newGame()" class="btn btn-success">NEW GAME</button>
     </div>
-    
 
     <div id="statistic">
         <h1 id="timer"></h1>
@@ -31,5 +36,6 @@
         <h2 id="correctLetter">Letter write correct: </h2>
         <h2 id="wrongLetter">Wrong letter: </h2>
     </div>
+    
 </body>
 </html>
